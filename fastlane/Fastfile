@@ -1,0 +1,41 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "This lane only builds for debug config and outputs ipa"
+  lane :buildOnly do
+    build_app(
+      configuration: "Debug",
+      scheme: "FastLaneTestProject",
+      silent: false,
+      clean: true,
+      output_name: "FastLaneTestProject.ipa",       
+      sdk: "iOS 14.5",
+      export_method: "development"
+    )
+  end
+
+desc "Deploy ipa to DeployGate"
+lane :myDeployGate do
+  deploygate(
+  api_token: "d94777b8-b1a1-467c-9946-c4c678ca5858",
+  user: "sangy05",
+  ipa: "./FastLaneTestProject.ipa",
+  message: "Build #{lane_context[SharedValues::BUILD_NUMBER]}",
+)
+end
+end
