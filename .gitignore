@@ -1,3 +1,6 @@
 *.xcworkspacedata
 report.xml
 FastLaneTestProject.ipa
+FastLaneTestProject.app.dSYM.zip
+tmp/*
+

@@ -6,11 +6,13 @@ platform :ios do
   desc "This lane only builds for debug config and outputs ipa"
   lane :buildOnly do
     build_app(
-      configuration: "Debug",
+      configuration: "Release",
       scheme: "FastLaneTestProject",
       silent: false,
       clean: true,
-      output_name: "FastLaneTestProject.ipa",       
+      output_name: "FastLaneTestProject.ipa",  
+      skip_codesigning: false,
+      archive_path:'tmp/fast',     
       sdk: "iOS 14.5",
       export_method: "development"
     )
