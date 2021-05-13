@@ -30,9 +30,9 @@ platform :ios do
   end
 
 desc "Deploy ipa to DeployGate"
-lane :myDeployGate do
+lane :myDeployGate do |options|
   deploygate(
-  api_token: "d94777b8-b1a1-467c-9946-c4c678ca5858",
+  api_token: options[:deployGateKey],
   user: "sangy05",
   ipa: "./FastLaneTestProject.ipa",
   message: "Build #{lane_context[SharedValues::BUILD_NUMBER]}",
